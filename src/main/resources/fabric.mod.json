@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "corruptworld",
+  "version": "${version}",
+
+  "name": "Corrupt World",
+  "description": "This is an example description! Tell everyone what your mod is about!",
+  "authors": [
+    "dindcrzy"
+  ],
+
+  "license": "CC0-1.0",
+  "icon": "assets/corruptworld/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.dindcrzy.corruptworld.CorruptWorld"
+    ],
+    "client": [
+      "com.dindcrzy.corruptworld.ClientMod"
+    ],
+    "cardinal-components": [
+      "com.dindcrzy.corruptworld.chunkcorrpution.CardinalChunk",
+      "com.dindcrzy.corruptworld.entitycorruption.CardinalEntity"
+    ]
+  },
+  "mixins": [
+    "corruptworld.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.6",
+    "fabric": "*",
+    "minecraft": "~1.18.2",
+    "java": ">=17"
+  },
+  "accessWidener": "corruption.accesswidener",
+  "custom": {
+    "cardinal-components": [
+      "corruptworld:corruption",
+      "corruptworld:corrupt_data"
+    ]
+  }
+}

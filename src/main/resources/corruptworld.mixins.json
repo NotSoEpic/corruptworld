@@ -1,0 +1,23 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.dindcrzy.corruptworld.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "PlayerEntityMixin",
+    "server.ServerWorldMixin"
+  ],
+  "client": [
+    "client.BlockColorsMixin",
+    "client.ClientChunkManagerMixin",
+    "client.ClientWorldAccessor",
+    "client.ClientWorldMixin",
+    "client.ItemColorsMixin",
+    "client.WorldRendererAccessor"
+  ],
+  "server": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
