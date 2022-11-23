@@ -1,13 +1,9 @@
 package com.dindcrzy.corruptworld.mixin;
 
-import com.dindcrzy.corruptworld.ChunkCorruption;
-import com.dindcrzy.corruptworld.IChunk;
-import com.dindcrzy.corruptworld.IWorld;
+import com.dindcrzy.corruptworld.chunkcorrpution.CardinalChunk;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
-import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -29,7 +25,10 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         if (isSpectator()) {
             for (int i = -2; i < 3; i++) {
                 for (int j = -2; j < 3; j++) {
-                    ((IWorld) getWorld()).setCorruption(true, getBlockX() + i, getBlockZ() + j);
+                    int x = getBlockX() + i;
+                    int z = getBlockZ() + j;
+                    CardinalChunk.setCorruption(getWorld(), x, z, true);
+                    CardinalChunk.syncCorruption(getWorld(), x, z);
                 }
             }
         }

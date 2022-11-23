@@ -16,9 +16,14 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Environment(EnvType.CLIENT)
 @Mixin(ClientWorld.class)
 public class ClientWorldMixin {
+    // makes vanilla tinted blocks purple
     @Redirect(method = "calculateColor", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/ColorResolver;getColor(Lnet/minecraft/world/biome/Biome;DD)I"))
     private int yoWhyHeOurple(ColorResolver instance, Biome biome, double x, double z) {
-        Chunk chunk = MinecraftClient.getInstance().world.getChunk(new BlockPos(x, 0, z));
+        // todo: figure out where the water overlay tint is calculated
+        Chunk chunk = null;
+        if (MinecraftClient.getInstance().world != null) {
+            chunk = MinecraftClient.getInstance().world.getChunk(new BlockPos(x, 0, z));
+        }
         if (CardinalChunk.getCorruption(chunk, (int)x, (int)z)) {
             return 0x843BA8;
         }

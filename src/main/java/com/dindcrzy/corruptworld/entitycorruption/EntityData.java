@@ -4,6 +4,8 @@ import com.dindcrzy.corruptworld.chunkcorrpution.CardinalChunk;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 
@@ -36,18 +38,24 @@ public class EntityData implements EntityComponent {
 
     @Override
     public void tick() {
-        if (!entity.isInvulnerable() && entity.age % 10 == 0) {
+        if (entity.age % 10 == 0) {
+            boolean canIncrease = !(entity instanceof PlayerEntity player && (player.isCreative() || player.isSpectator()));
             corruptionCount = CardinalChunk.countWorldSlice(
                     entity.world,
                     entity.getBlockPos().add(-3, 0, -3),
                     entity.getBlockPos().add(3, 0, 3));
-            if (corruptionCount < 10) {
+            if (corruptionCount < 10 || !canIncrease) {
                 CardinalEntity.deltaCorruptionValueClamp(entity, -5, 0, 120);
             } else if (corruptionCount > 25) {
                 CardinalEntity.deltaCorruptionValueClamp(entity, 1, 0, 120);
             }
-            if (CardinalEntity.getCorruptionValue(entity) >= 40 && entity.getRandom().nextInt(20) == 0) {
-                entity.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 60));
+            int v = CardinalEntity.getCorruptionValue(entity);
+            if (entity instanceof HostileEntity) { // apply beneficial effects to hostile mobs
+                // todo: beneficial effects for hostile entities
+            } else { // apply harmful effects to passive mobs and players
+                if (v >= 40 && entity.getRandom().nextInt(20) == 0) {
+                    entity.addStatusEffect(new StatusEffectInstance(StatusEffects.POISON, 60));
+                }
             }
         }
         CardinalEntity.CORRUPT_DATA.sync(entity);

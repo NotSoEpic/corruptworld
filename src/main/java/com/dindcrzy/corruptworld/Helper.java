@@ -1,5 +1,7 @@
 package com.dindcrzy.corruptworld;
 
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 
 import java.util.BitSet;
@@ -23,5 +25,15 @@ public class Helper {
             set.set(bi, bi + width, true); // [bi, bi + width)
         }
         return set;
+    }
+    
+    public static void writeVec3d(PacketByteBuf buf, Vec3d v) {
+        buf.writeDouble(v.x);
+        buf.writeDouble(v.y);
+        buf.writeDouble(v.z)
+    ;
+    }
+    public static Vec3d readVec3d(PacketByteBuf buf) {
+        return new Vec3d(buf.readDouble(), buf.readDouble(), buf.readDouble());
     }
 }

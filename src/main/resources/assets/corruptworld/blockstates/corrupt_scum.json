@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "corruptworld:block/corrupt_scum"
+      },
+      {
+        "model": "corruptworld:block/corrupt_scum",
+        "y": 90
+      },
+      {
+        "model": "corruptworld:block/corrupt_scum",
+        "y": 180
+      },
+      {
+        "model": "corruptworld:block/corrupt_scum",
+        "y": 270
+      }
+    ]
+  }
+}

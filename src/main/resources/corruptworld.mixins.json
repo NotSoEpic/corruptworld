@@ -8,12 +8,13 @@
     "server.ServerWorldMixin"
   ],
   "client": [
-    "client.BlockColorsMixin",
     "client.ClientChunkManagerMixin",
-    "client.ClientWorldAccessor",
     "client.ClientWorldMixin",
-    "client.ItemColorsMixin",
-    "client.WorldRendererAccessor"
+    "client.BlockColorsMixin",
+    "client.ClientWorldAccessor",
+    "client.WorldRendererAccessor",
+    "client.ChunkRendererRegionAccessor",
+    "client.RenderedChunkAccessor"
   ],
   "server": [
   ],
